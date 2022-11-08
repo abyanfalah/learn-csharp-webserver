@@ -1,16 +1,9 @@
-﻿using System.Net.Http;
-using System.Net;
-
-
-using var listener = new HttpListener();
-listener.Prefixes.Add("http://localhost:8000");
-
-listener.Start();
-
-while (true)
+﻿class Program
 {
-	HttpListenerContext ctx = listener.GetContext();
-	HttpListenerRequest req = ctx.Request;
-
-
+	public static void Main()
+	{
+		Console.Clear();
+		var server = new Server(8000);
+		server.Run();
+	}
 }
