@@ -35,14 +35,7 @@ public class Server
 			HttpListenerContext ctx = _listener.GetContext();
 			HttpListenerRequest req = ctx.Request;
 
-			// req.Headers.Add("User-Agent", "C# Program");
-			// using HttpListenerResponse res = ctx.Response;
-
-			Person bob = new Person("bob", 31);
-
-			Response.stringResponse(ctx, $"Hello {bob.name}, so you are {bob.age} years old?");
-
-
+			HandleRequest(ctx);
 
 			Log(ctx);
 		}
@@ -51,7 +44,10 @@ public class Server
 
 	private void HandleRequest(HttpListenerContext ctx)
 	{
+		var httpMethod = ctx.Request.HttpMethod;
+		var message = $"You are using {httpMethod} request method";
 
+		Response.String(ctx, message);
 
 	}
 
@@ -61,7 +57,8 @@ public class Server
 
 	private void Log(HttpListenerContext ctx)
 	{
-		Console.WriteLine($"[{ctx.Response.StatusCode}] {ctx.Request.Url}");
+		var time = DateTime.Now;
+		Console.WriteLine($"{time} [{ctx.Response.StatusCode}] {ctx.Request.HttpMethod} {ctx.Request.Url} ");
 	}
 
 
