@@ -26,6 +26,7 @@ while (true)
 	res.StatusCode = (int)HttpStatusCode.OK;
 	res.StatusDescription = "OK";
 
+	req.Headers.Add("User-Agent", "C# Program");
 	string? ua = req.Headers.Get("User-Agent");
 
 	string data = ua ?? "Unknown";
