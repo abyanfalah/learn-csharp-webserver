@@ -26,8 +26,9 @@ while (true)
 	res.StatusCode = (int)HttpStatusCode.OK;
 	res.StatusDescription = "OK";
 
+	string? ua = req.Headers.Get("User-Agent");
 
-	string data = "Hello World";
+	string data = ua ?? "Unknown";
 	byte[] buffer = Encoding.UTF8.GetBytes(data);
 	res.ContentLength64 = buffer.Length;
 
